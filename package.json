@@ -1,0 +1,35 @@
+{
+  "name": "molecule-synthesis-visualizer-mobile",
+  "version": "1.0.0",
+  "description": "Interactive organic chemistry molecule synthesis visualization tool - Mobile Edition",
+  "main": "index.html",
+  "scripts": {
+    "install-capacitor": "npm install @capacitor/core @capacitor/cli @capacitor/android",
+    "init": "npx cap init",
+    "add-android": "npx cap add android",
+    "copy": "npx cap copy",
+    "sync": "npx cap sync",
+    "open-android": "npx cap open android",
+    "build-apk": "cd android && ./gradlew assembleDebug",
+    "build-release": "cd android && ./gradlew assembleRelease"
+  },
+  "keywords": [
+    "chemistry",
+    "organic-chemistry",
+    "molecules",
+    "synthesis",
+    "visualization",
+    "mobile",
+    "android",
+    "apk"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  }
+}

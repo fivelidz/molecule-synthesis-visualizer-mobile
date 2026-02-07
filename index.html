@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecule Synthesis Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 Organic Chemistry Synthesis Visualizer</h1>
+            <p class="subtitle">Interactive molecule drawing and reaction pathway visualization</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Sidebar - Tools -->
+            <aside class="sidebar left">
+                <div class="panel">
+                    <h3>Drawing Tools</h3>
+                    <div class="tool-group">
+                        <button class="tool-btn active" data-tool="select">
+                            <span class="icon">👆</span>
+                            Select
+                        </button>
+                        <button class="tool-btn" data-tool="atom">
+                            <span class="icon">⚛️</span>
+                            Atom
+                        </button>
+                        <button class="tool-btn" data-tool="bond">
+                            <span class="icon">➖</span>
+                            Single Bond
+                        </button>
+                        <button class="tool-btn" data-tool="double-bond">
+                            <span class="icon">═</span>
+                            Double Bond
+                        </button>
+                        <button class="tool-btn" data-tool="triple-bond">
+                            <span class="icon">≡</span>
+                            Triple Bond
+                        </button>
+                        <button class="tool-btn" data-tool="wedge">
+                            <span class="icon">🔺</span>
+                            Wedge
+                        </button>
+                        <button class="tool-btn" data-tool="dash">
+                            <span class="icon">⋯</span>
+                            Dash
+                        </button>
+                        <button class="tool-btn" data-tool="chain">
+                            <span class="icon">⛓️</span>
+                            Chain
+                        </button>
+                        <button class="tool-btn" data-tool="ring">
+                            <span class="icon">⬡</span>
+                            Ring
+                        </button>
+                        <button class="tool-btn" data-tool="benzene">
+                            <span class="icon">⬢</span>
+                            Benzene
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Common Atoms</h3>
+                    <div class="atom-palette">
+                        <button class="atom-btn" data-atom="C">C</button>
+                        <button class="atom-btn" data-atom="H">H</button>
+                        <button class="atom-btn" data-atom="O">O</button>
+                        <button class="atom-btn" data-atom="N">N</button>
+                        <button class="atom-btn" data-atom="S">S</button>
+                        <button class="atom-btn" data-atom="P">P</button>
+                        <button class="atom-btn" data-atom="F">F</button>
+                        <button class="atom-btn" data-atom="Cl">Cl</button>
+                        <button class="atom-btn" data-atom="Br">Br</button>
+                        <button class="atom-btn" data-atom="I">I</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Functional Groups</h3>
+                    <div class="functional-groups">
+                        <button class="fg-btn" data-group="OH">-OH (Alcohol)</button>
+                        <button class="fg-btn" data-group="CHO">-CHO (Aldehyde)</button>
+                        <button class="fg-btn" data-group="COOH">-COOH (Carboxylic)</button>
+                        <button class="fg-btn" data-group="NH2">-NH₂ (Amine)</button>
+                        <button class="fg-btn" data-group="NO2">-NO₂ (Nitro)</button>
+                        <button class="fg-btn" data-group="CH3">-CH₃ (Methyl)</button>
+                        <button class="fg-btn" data-group="CO">C=O (Ketone)</button>
+                        <button class="fg-btn" data-group="COCl">-COCl (Acyl Cl)</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Actions</h3>
+                    <button class="action-btn" id="clear-canvas">🗑️ Clear</button>
+                    <button class="action-btn" id="undo">↶ Undo</button>
+                    <button class="action-btn" id="redo">↷ Redo</button>
+                    <button class="action-btn" id="export-png">💾 Export PNG</button>
+                </div>
+            </aside>
+
+            <!-- Center - Canvas Area -->
+            <main class="canvas-area">
+                <div class="canvas-container">
+                    <canvas id="molecule-canvas"></canvas>
+                    <div class="canvas-info">
+                        <span id="cursor-info"></span>
+                        <span id="molecule-formula"></span>
+                    </div>
+                </div>
+
+                <div class="reaction-controls">
+                    <h3>⚗️ Reaction Mechanism</h3>
+                    <div class="reaction-buttons">
+                        <button class="reaction-btn" data-reaction="substitution">SN2 Substitution</button>
+                        <button class="reaction-btn" data-reaction="elimination">E2 Elimination</button>
+                        <button class="reaction-btn" data-reaction="addition">Addition</button>
+                        <button class="reaction-btn" data-reaction="oxidation">Oxidation</button>
+                        <button class="reaction-btn" data-reaction="reduction">Reduction</button>
+                        <button class="reaction-btn" data-reaction="custom">Custom Arrow</button>
+                    </div>
+                    <div class="reaction-input">
+                        <input type="text" id="reagent-input" placeholder="Enter reagents (e.g., NaOH, H2SO4)">
+                        <button id="add-reagent">Add Reagent</button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar - Synthesis Pathway -->
+            <aside class="sidebar right">
+                <div class="panel">
+                    <h3>Synthesis Pathway</h3>
+                    <div id="synthesis-steps" class="synthesis-steps">
+                        <p class="empty-state">No steps added yet. Draw molecules and add reactions to build your synthesis pathway.</p>
+                    </div>
+                    <div class="pathway-controls">
+                        <button id="add-step" class="action-btn">➕ Add Step</button>
+                        <button id="save-pathway" class="action-btn">💾 Save Pathway</button>
+                        <button id="load-pathway" class="action-btn">📂 Load Pathway</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Templates</h3>
+                    <div class="templates">
+                        <button class="template-btn" data-template="ethanol">Ethanol</button>
+                        <button class="template-btn" data-template="acetone">Acetone</button>
+                        <button class="template-btn" data-template="benzene">Benzene</button>
+                        <button class="template-btn" data-template="glucose">Glucose</button>
+                        <button class="template-btn" data-template="aspirin">Aspirin</button>
+                        <button class="template-btn" data-template="caffeine">Caffeine</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Properties</h3>
+                    <div id="molecule-properties" class="properties">
+                        <div class="property">
+                            <strong>Formula:</strong> <span id="prop-formula">-</span>
+                        </div>
+                        <div class="property">
+                            <strong>Mol. Weight:</strong> <span id="prop-weight">-</span>
+                        </div>
+                        <div class="property">
+                            <strong>Atoms:</strong> <span id="prop-atoms">0</span>
+                        </div>
+                        <div class="property">
+                            <strong>Bonds:</strong> <span id="prop-bonds">0</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="molecule-engine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
